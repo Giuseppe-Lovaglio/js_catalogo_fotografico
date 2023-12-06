@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        background-color: rgb(40, 40, 40);
+    }
+
+    #container_2 {
+        margin: auto;
+        margin-top: 20px;
+        width: 820px;
+    }
+
+    #titolo {
+        color: hsl(60, 56%, 80%);
+    }
+
+    #bottone_1 {
+        width: 100px;
+        height: 750.5px;
+        float: left;
+        text-align: right;
+    }
+
+    #bottone_2 {
+        width: 100px;
+        height: 750.5px;
+        float: left;
+        text-align: left;
+    }
+
+    .bottoni {
+        display: none;
+        width: 100px;
+        height: 100px;
+        margin-top: 400px;
+        border-radius: 50%;
+        border: none;
+        font-size: 100px;
+        cursor: pointer;
+        background-color: hsl(60, 56%, 80%);
+    }
+
+    .bottoni:hover {
+        background-color: hsl(60, 56%, 70%);
+    }
+
+    #menu {
+        height: 50px;
+        font-size: 16px;
+        font-family: Georgia, Times, 'Times New Roman', serif;
+        border-radius: 15px;
+        cursor: pointer;
+        background-color: hsl(60, 56%, 80%);
+    }
+
+    #form_container {
+        width: 600px;
+        margin-left: 10px;
+        margin-right: 10px;
+        float: left;
+        text-align: center;
+    }
+
+    #box {
+        width: 600px;
+        height: 600px;
+        margin-top: 20px;
+        align-items: center;
+        margin-left: auto;
+        margin-right: auto;
+        position: relative;
+    }
+
+    img {
+        position: absolute;
+        top: 0px;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+        margin: auto;
+        min-width: auto;
+        max-width: 100%;
+        max-height: 100%;
+        width: auto;
+        height: auto;
+        border-radius: 50px;
+    }
+
+</style>
+<body>
+    <div id="container">
+        <div id="container_2">
+            <div id="bottone_1">
+                <input type="button" name="indietro" class="bottoni" id="indietro">
+            </div>
+            <div id="form_container">
+                <h1 id="titolo">Comedy Wildlife Photography Awards</h1>
+                <form name="form">
+                    <select name="menu" id="menu">
+                        <option disabled value="" selected hidden>Scorri la galleria !</option>
+                        <option value="0">Giraffa</option>
+                        <option value="1">Pesce</option>
+                        <option value="2">Procione</option>
+                        <option value="3">Leoni</option>
+                        <option value="4">Pinguini</option>
+                        <option value="5">Orso</option>
+                        <option value="6">Scoiattolo</option>
+                        <option value="7">Mmmmmm</option>
+                        <option value="8">Orso polare</option>
+                        <option value="9">Elefanti</option>
+                        <option value="10">Procione su rami</option>
+                        <option value="11">Pulcinelle di mare</option>
+                    </select>
+                </form>
+                <div id="box"></div>
+            </div>
+            <div id="bottone_2">
+                <input type="button" name="avanti" class="bottoni" id="avanti">
+            </div>
+        </div>
+    </div>
+    <script>
+        let immagini = [
+            "https://i.insider.com/5f5a5f37e6ff30001d4e8163?width=1000&format=jpeg&auto=webp",
+            "https://i.insider.com/5f5a2b177ed0ee001e25e6f4?width=800&format=jpeg&auto=webp",
+            "https://i.insider.com/5f5a2b927ed0ee001e25e70b?width=800&format=jpeg&auto=webp",
+            "https://i.insider.com/5f5a2b4d7ed0ee001e25e6fc?width=800&format=jpeg&auto=webp",
+            "https://i.insider.com/5f5a2b5ae6ff30001d4e7f5b?width=800&format=jpeg&auto=webp",
+            "https://i.insider.com/5f5a2b537ed0ee001e25e6fd?width=800&format=jpeg&auto=webp",
+            "https://i.insider.com/5f5a2b1e7ed0ee001e25e6f5?width=800&format=jpeg&auto=webp",
+            "https://i.insider.com/5f5a2b597ed0ee001e25e6fe?width=800&format=jpeg&auto=webp",
+            "https://i.insider.com/5f5a2b4ae6ff30001d4e7f59?width=800&format=jpeg&auto=webp",
+            "https://i.insider.com/5f5a2b477ed0ee001e25e6fa?width=800&format=jpeg&auto=webp",
+            "https://i.insider.com/5f5a2b317ed0ee001e25e6f7?width=800&format=jpeg&auto=webp",
+            "https://i.insider.com/5f5a2b48e6ff30001d4e7f57?width=800&format=jpeg&auto=webp",
+        ];
+        let box;
+
+        document.getElementById("menu").addEventListener("change", cambiaImmagine);
+
+        function cambiaImmagine(){
+            document.getElementById("indietro").style.display = "block";
+            document.getElementById("avanti").style.display = "block";
+            let valore = document.form.menu.value;
+            document.getElementById("box").style.display = "block";
+            document.getElementById("box").innerHTML = "<img src = '" + immagini[valore] + "'' />";
+        }
+
+        document.getElementById("avanti").addEventListener("click", avanti);
+
+        function avanti() {
+            let valore = Number(document.form.menu.value) + 1;
+            if(valore > 11) {
+                valore = 0;
+            }
+            document.form.menu.value = valore;
+            document.getElementById("box").innerHTML = "<img src = '" + immagini[valore] + "'' />";
+        }
+
+        document.getElementById("indietro").addEventListener("click", indietro);
+
+        function indietro() {
+            let valore = Number(document.form.menu.value) - 1;
+
+            if(valore < 0) {
+                valore = 11;
+            }
+            document.form.menu.value = valore;
+            document.getElementById("box").innerHTML = "<img src = '" + immagini[valore] + "'' />";
+        }
+    </script>
+</body>
+</html>
